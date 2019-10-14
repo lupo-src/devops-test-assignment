@@ -8,3 +8,11 @@ If organisation is not yet ready for above scenario one can implement releasing 
 
 ## How can we improve build and deploying our software
 At the beginning we could leverage Ansible playbooks and dockerized services(wherever possible) to build & deploy on each environment. So triggering manually when new release is ready but deploying and testing automated already with mentioned toolset. Whenever project is ready to move forward we could wrap up current solution with CI/CD pipelines using for instance Jenkins and progresivelly move forward with automation.
+
+## Please provide some examples on deploying the Python example in Windows and Linux for the tools you will be suggesting deploying with
+Prerequisites:
+* Installed Docker 18.X (on Windows or Linux depending on where you want to deploy)
+* Installed Ansible 2.7.X (only on Linux acting as "control" host only)
+Steps to deploy:
+* In repo root dir: `docker build -t service_code .`
+* Run ansible playbook 
