@@ -1,0 +1,6 @@
+[all:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[linux]
+localhost
+[windows]
+localhost
