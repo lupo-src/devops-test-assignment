@@ -10,10 +10,13 @@ If organisation is not yet ready for above scenario one can implement releasing 
 At the beginning we could leverage Ansible playbooks and dockerized services(wherever possible) to build & deploy on each environment. So triggering manually when new release is ready but deploying and testing automated already with mentioned toolset. Whenever project is ready to move forward we could wrap up current solution with CI/CD pipelines using for instance Jenkins and progresivelly move forward with automation.
 
 ## Please provide some examples on deploying the Python example in Windows and Linux for the tools you will be suggesting deploying with
-Prerequisites:
-* Installed Ansible 2.7.X (only on Linux acting as bastion host only)
-* Installed GIT
+Test environment:
+* Linux Ubuntu 16.04 LTS
+* Ansible 2.7.X (only on Linux acting as Bastion host only)
+* GIT
 
 Steps to deploy:
 * Checkout current repo `git clone https://github.com/lupo-src/devops-test-assignment.git`
+* Adjust inventory file `hosts` if you want to execute on another host then locally (Linux part)
+* Adjust inventory file `hosts` with your Windows machine IP (Windows part - make sure that there is connection between Bastion and Windows machine)
 * Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml`
