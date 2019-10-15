@@ -1,6 +1,6 @@
 [all:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 [linux]
-localhost
+127.0.0.1 ansible_connection=local
 [windows]
 localhost

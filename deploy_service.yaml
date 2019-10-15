@@ -1,8 +1,10 @@
 - name: Installing docker
+  become: yes
+  become_method: sudo
   hosts: linux
   tasks:
     - name: Install aptitude using apt
-          apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
     
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
@@ -21,14 +23,22 @@
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
     
+    - name: Downloading pip installer
+      get_url:
+        url: https://bootstrap.pypa.io/get-pip.py
+        dest: ./get-pip.py
+
+    - name: Installing PIP
+      shell: python get-pip.py
+
     - name: Install Docker Module for Python
       pip:
         name: docker
 
 - name: Deploy Python service on Linux
   hosts: linux
-  environment:
-    DOCKER_HOST: tcp://localhost:2375
+  become: yes
+  become_method: sudo
   tasks:
     - name: Checkout GIT repo
       git:
