@@ -15,5 +15,5 @@ Prerequisites:
 * Installed GIT
 
 Steps to deploy:
-* Checkout current repo
+* Checkout current repo `git clone https://github.com/lupo-src/devops-test-assignment.git`
 * Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml`
