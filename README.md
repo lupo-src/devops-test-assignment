@@ -15,4 +15,4 @@ Prerequisites:
 
 Steps to deploy:
 * Checkout current repo
-* Run ansible playbook `ansible-playbook -i hosts deploy_service.yml
+* Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml`
