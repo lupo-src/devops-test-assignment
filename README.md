@@ -11,9 +11,8 @@ At the beginning we could leverage Ansible playbooks and dockerized services(whe
 
 ## Please provide some examples on deploying the Python example in Windows and Linux for the tools you will be suggesting deploying with
 Prerequisites:
-* Installed Docker 18.X (on Windows or Linux depending on where you want to deploy)
-* Installed Ansible 2.7.X (only on Linux acting as "control" host only)
+* Installed Ansible 2.7.X (only on Linux acting as bastion host only)
 
 Steps to deploy:
-* In repo root dir: `docker build -t service_code .`
-* Run ansible playbook 
+* Checkout current repo
+* Run ansible playbook `ansible-playbook -i hosts deploy_service.yml
