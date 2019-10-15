@@ -12,7 +12,7 @@ At the beginning we could leverage Ansible playbooks and dockerized services(whe
 ## Please provide some examples on deploying the Python example in Windows and Linux for the tools you will be suggesting deploying with
 Prerequisites:
 * Installed Ansible 2.7.X (only on Linux acting as bastion host only)
-* git version 2.7.4
+* Installed GIT
 
 Steps to deploy:
 * Checkout current repo
