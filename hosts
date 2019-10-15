@@ -3,4 +3,11 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 [linux]
 127.0.0.1 ansible_connection=local
 [windows]
-localhost
+windows ansible_host: 127.0.0.1 # adjust IP here
+[windows:vars]
+ansible_user: user # adjust with your user
+ansible_password: password # adjust with your password
+ansible_connection: winrm
+ansible_port: 5986
+ansible_winrm_transport: ntlm
+ansible_winrm_server_cert_validation: ignore

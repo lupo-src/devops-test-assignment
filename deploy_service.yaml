@@ -52,3 +52,13 @@
       docker_container:
         name: python_service_run
         image: python_service
+
+- name: Deploy Python service on Windows
+  hosts: windows
+  gather_facts: no
+  tasks:
+    - name: install the Win32-OpenSSH service
+      win_chocolatey:
+        name: openssh
+        package_params: /SSHServerFeature
+        state: present
