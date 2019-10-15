@@ -1,0 +1,20 @@
+- name: Deploy Python service on Linux
+  hosts: linux
+  environment:
+    DOCKER_HOST: tcp://localhost:2375
+  tasks:
+    - name: Checkout GIT repo
+      git:
+        repo: https://github.com/lupo-src/devops-test-assignment.git
+        dest: ./devops-test-assignment
+    - name : Install docker module
+      pip:
+        name: docker
+    - name: Build docker image
+      docker_image:
+        name: python_service
+        path: ./devops-test-assignment
+    - name: Start docker container
+      docker_container:
+        name: python_service_run
+        image: python_service
