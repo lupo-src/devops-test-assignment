@@ -15,6 +15,7 @@ Test environment:
 * Linux Ubuntu 16.04 LTS
 * Ansible 2.8.X (only on Linux acting as Bastion host only)
 * GIT
+* PIP with winrm module (`sudo pip install pywinrm`)
 
 Managed Windows Host:
 * Windows 2012 R2
@@ -30,10 +31,21 @@ $config_script = "C:\Temp\ConfigureRemotingForAnsible.ps1"
 powershell.exe -ExecutionPolicy ByPass -File $config_script -EnableCredSSP
 ```
 
+* Verify WinRM configuration:
+
+```powershell
+$username = "user"
+$password = ConvertTo-SecureString -String "password" -AsPlainText -Force
+$cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
+
+$session_option = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
+Invoke-Command -ComputerName 127.0.0.1 -UseSSL -ScriptBlock { whoami } -Credential $cred -SessionOption $session_option
+```
+
 Steps to deploy:
 * Login to Bastion host and below commands
 * Checkout current repo `git clone https://github.com/lupo-src/devops-test-assignment.git`
-* <Linux> Adjust inventory file `hosts` if you want to execute on another host then locally
-* <Windows> Adjust inventory file `hosts` with your Windows machine IP (make sure that there is connection between Bastion and Windows machine)
-* <Linux> Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml --limit=linux`
-* <Windows> Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml --limit=windows`
+* (Linux) Adjust inventory file `hosts` if you want to execute on another host then locally
+* (Windows) Adjust inventory file `hosts` with your Windows machine IP (make sure that there is connection between Bastion and Windows machine)
+* (Linux) Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml --limit=linux`
+* (Windows) Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml --limit=windows`
