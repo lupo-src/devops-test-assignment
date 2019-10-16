@@ -15,6 +15,7 @@ Test environment:
 * Linux Ubuntu 16.04 LTS
 * Ansible 2.8.X (only on Linux acting as Bastion host only)
 * GIT
+* PIP with winrm module (`sudo pip install pywinrm`)
 
 Managed Windows Host:
 * Windows 2012 R2
