@@ -11,6 +11,10 @@ At the beginning we could leverage Ansible playbooks and dockerized services(whe
 
 ## Please provide some examples on deploying the Python example in Windows and Linux for the tools you will be suggesting deploying with
 
+Assumptions:
+* To run python service in the background on Linux I used docker (also more forward looking approach - easier to migrate to eg. Kubernetes)
+* To run python service in the background on Windows I used NSSM (we could also levarage Docker here but would be a bit more complex)
+
 Test environment:
 * Linux Ubuntu 16.04 LTS
 * Ansible 2.8.X (only on Linux acting as Bastion host only)
@@ -45,7 +49,7 @@ Invoke-Command -ComputerName 127.0.0.1 -UseSSL -ScriptBlock { whoami } -Credenti
 Steps to deploy:
 * Login to Bastion host and below commands
 * Checkout current repo `git clone https://github.com/lupo-src/devops-test-assignment.git`
-* (Linux) Adjust inventory file `hosts` if you want to execute on another host then locally
-* (Windows) Adjust inventory file `hosts` with your Windows machine IP (make sure that there is connection between Bastion and Windows machine)
+* (Linux) Adjust inventory file `hosts` if you want to execute on another host then locally, provide credentials if needed
+* (Windows) Adjust inventory file `hosts` with your Windows machine IP (make sure that there is connection between Bastion and Windows machine on port 5986) and with your credentials
 * (Linux) Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml --limit=linux`
 * (Windows) Run ansible playbook `ansible-playbook -i hosts deploy_service.yaml --limit=windows`
