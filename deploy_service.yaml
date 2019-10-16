@@ -57,8 +57,29 @@
   hosts: windows
   gather_facts: no
   tasks:
-    - name: install the Win32-OpenSSH service
+    - name: Creating ansible directory
+      win_file:
+        path: C:\ansible
+        state: directory
+    - name: Creating python script on remote host
+      win_copy:
+        src: ./service_code.py
+        dest: C:\ansible\service_code.py
+    - name: Installing Python
       win_chocolatey:
-        name: openssh
-        package_params: /SSHServerFeature
-        state: present
+        name: python2
+        state: latest
+    - name: Installing NSSM
+      win_chocolatey:
+        name: nssm
+        state: latest
+    - name: Install the service with python code
+      win_nssm:
+        name: python_service
+        application: C:\Python27\python.exe
+        arguments:
+          - C:\ansible\service_code.py
+    - name: Start the service
+      win_service:
+        name: python_service
+        state: started
